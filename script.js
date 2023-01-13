@@ -18,13 +18,13 @@ const clickScissors = scissorsBtn.addEventListener("click", game);
 //Create a Function (getPlayerChoice) to Grab user inputs as choice of paper, rock or scissors
 function getPlayerChoice(){
     const playerChoice = (clickPaper || clickRock || clickScissors);
-    if (playerChoice == clickPaper){
+    if (playerChoice === clickPaper){
         userChoice_p.textContent = (`You Choose: Paper`);
         return "Paper";
-    }else if (playerChoice == clickRock){
+    }else if (playerChoice === clickRock){
         userChoice_p.textContent = (`You Choose: Rock`);
         return "Rock";
-    }else if (playerChoice == clickScissors){
+    }else if (playerChoice === clickScissors){
         userChoice_p.textContent = (`You Choose: Scissors`);
         return "Scissors";
     }else {
