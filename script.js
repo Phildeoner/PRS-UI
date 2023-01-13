@@ -111,10 +111,19 @@ function game(){
 
 // Compile playerScore and computerScore and Declare a Winner.
     if (userScore == 5){
-        console.log("Congratulations, You Won the Game!!!");
+        remark_p.textContent = ("Congratulations, You Won the Game!!!");
+        clearBoard();
     }else if(computerScore == 5){
-        console.log("Oh Oh You Lose to Computer!!!");
+        remark_p.textContent = ("Oh Oh You Lose to Computer!!!");
+        clearBoard();
     }else {
-        console.log("It was an Exciting Game to Decide, Its A Tie!!!");
+        console.log("The Game is ON!!!");
     }
+}
+
+//A clearBoard function to reset all scores and rounds after any 5 point score
+function clearBoard(){
+    userScore = 0;
+    computerScore = 0;
+    round = 1;
 }
