@@ -93,6 +93,20 @@ function playRound(){
 
 //Craete a function (game) to call all three functions and  update scores.
 function game(){
+// Compile playerScore and computerScore and Declare a Winner.
+    if (userScore == 5){
+        remark_p.textContent = ("Congratulations, You Won the Game!!!");
+        clearBoard();
+    }else if(computerScore == 5){
+        remark_p.textContent = ("Oh Oh You Lose to Computer!!!");
+        clearBoard();
+    }else {
+        console.log("The Game is ON!!!");
+    }
+}
+
+//A function to update scoreboard
+function upadteScoreBoard(){
     userScore_span.innerHTML = userScore;
     computerScore_span.innerHTML = computerScore;
     round_span.innerHTML = round;
@@ -107,17 +121,6 @@ function game(){
         round ++;
     }else {
         round ++;
-    }
-
-// Compile playerScore and computerScore and Declare a Winner.
-    if (userScore == 5){
-        remark_p.textContent = ("Congratulations, You Won the Game!!!");
-        clearBoard();
-    }else if(computerScore == 5){
-        remark_p.textContent = ("Oh Oh You Lose to Computer!!!");
-        clearBoard();
-    }else {
-        console.log("The Game is ON!!!");
     }
 }
 
