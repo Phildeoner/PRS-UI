@@ -11,20 +11,30 @@ const round_span = document.getElementById("round");
 const remark_p = document.querySelector(".remark");
 const userChoice_p = document.querySelector(".userChoice");
 const compChoice_p = document.querySelector(".compChoice");
-const clickPaper = paperBtn.addEventListener("click", game);
-const clickRock = rockBtn.addEventListener("click", game);
-const clickScissors = scissorsBtn.addEventListener("click", game);
+let playerChoice = '';
+const clickPaper = paperBtn.addEventListener("click", function(){
+    playerChoice = 'Paper';
+    game();
+});
+const clickRock = rockBtn.addEventListener("click", function(){
+    playerChoice = 'Rock';
+    game();
+});
+const clickScissors = scissorsBtn.addEventListener("click", function(){
+    playerChoice = 'Scissors';
+    game();
+});
+
 
 //Create a Function (getPlayerChoice) to Grab user inputs as choice of paper, rock or scissors
 function getPlayerChoice(){
-    const playerChoice = (clickPaper || clickRock || clickScissors);
-    if (playerChoice === clickPaper){
+    if (playerChoice === 'Paper'){
         userChoice_p.textContent = (`You Choose: Paper`);
         return "Paper";
-    }else if (playerChoice === clickRock){
+    }else if (playerChoice === 'Rock'){
         userChoice_p.textContent = (`You Choose: Rock`);
         return "Rock";
-    }else if (playerChoice === clickScissors){
+    }else if (playerChoice === 'Scissors'){
         userChoice_p.textContent = (`You Choose: Scissors`);
         return "Scissors";
     }else {
