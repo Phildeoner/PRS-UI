@@ -120,10 +120,10 @@ function game(){
     }
 
 // Compile playerScore and computerScore and Declare a Winner.
-    if (userScore == 5){
+    if (userScore === 5){
         remark_p.textContent = ("Congratulations, You Won the Game!!!");
         clearBoard();
-    }else if(computerScore == 5){
+    }else if(computerScore === 5){
         remark_p.textContent = ("Oh Oh You Lose to Computer!!!");
         clearBoard();
     }else {
