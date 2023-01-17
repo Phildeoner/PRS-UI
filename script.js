@@ -12,18 +12,7 @@ const remark_p = document.querySelector(".remark");
 const userChoice_p = document.querySelector(".userChoice");
 const compChoice_p = document.querySelector(".compChoice");
 let playerChoice = '';
-const clickPaper = paperBtn.addEventListener("click", function(){
-    playerChoice = 'Paper';
-    game();
-});
-const clickRock = rockBtn.addEventListener("click", function(){
-    playerChoice = 'Rock';
-    game();
-});
-const clickScissors = scissorsBtn.addEventListener("click", function(){
-    playerChoice = 'Scissors';
-    game();
-});
+
 
 
 //Create a Function (getPlayerChoice) to Grab user inputs as choice of paper, rock or scissors
@@ -61,14 +50,14 @@ function getComputerChoice(){
 }
 
 //Create a Function (playRound) to call getPlayerChoice and getComputerChoice to play one round of the game
-function playRound(){
-    const playerSelection = getPlayerChoice();
+function playRound(playerChoice){
+    playerChoice = getPlayerChoice();
     const computerSelection = getComputerChoice();
-        if (playerSelection === computerSelection){
+        if (playerChoice === computerSelection){
             remark_p.textContent = ("Its a Tie, Try Again!!!");
             return "Tie";
         }else {
-            if (playerSelection === "Paper"){
+            if (playerChoice === "Paper"){
                 if (computerSelection === "Rock"){
                     remark_p.textContent = ("You Won!!! Paper Covers Rock.");
                     return "Won";
@@ -76,7 +65,7 @@ function playRound(){
                     remark_p.textContent = ("You Lose!!! Scissors Cuts Paper.");
                     return "Lose";
                 }
-            }else if (playerSelection === "Rock"){
+            }else if (playerChoice === "Rock"){
                 if (computerSelection === "Scissors"){
                     remark_p.textContent = ("You Won!!! Rock Smashes Scissors.");
                     return "Won";
@@ -84,7 +73,7 @@ function playRound(){
                     remark_p.textContent = ("You Lose!!! Paper Covers Rock.");
                     return "Lose";
                 }
-            }else if(playerSelection === "Scissors"){
+            }else if(playerChoice === "Scissors"){
                 if (computerSelection === "Paper"){
                     remark_p.textContent = ("You Won!!! Scissors Cuts Paper.");
                     return "Won";
@@ -100,23 +89,32 @@ function playRound(){
 
 //Craete a function (game) to call all three functions and  update scores.
 function game(){
-    playRound();
-    updateScoreboard();
-    compileScores();
+    paperBtn.addEventListener("click", function(){
+        playerChoice = 'Paper';
+        playRound("Paper");
+    });
+    rockBtn.addEventListener("click", function(){
+        playerChoice = 'Rock';
+        playRound("Rock");
+    });
+   scissorsBtn.addEventListener("click", function(){
+        playerChoice = 'Scissors';
+        playRound("Scissors");
+    });
 }
+game();
 
 //A function to updateScoreboard
 function updateScoreboard(){
     userScore_span.innerHTML = userScore;
     computerScore_span.innerHTML = computerScore;
     round_span.innerHTML = round;
-    const play = playRound();
-    
+
     //Conditions for Scores Update for User and Computer
-    if (play === "Won"){
+    if ("Won"){
         userScore ++;
         round ++;
-    }else if (play === "Lose"){
+    }else if ("Lose"){
         computerScore ++;
         round ++;
     }else {
