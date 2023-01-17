@@ -62,7 +62,6 @@ function getComputerChoice(){
 
 //Create a Function (playRound) to call getPlayerChoice and getComputerChoice to play one round of the game
 function playRound(){
-    updateScoreboard();
     const playerSelection = getPlayerChoice();
     const computerSelection = getComputerChoice();
         if (playerSelection === computerSelection){
@@ -102,8 +101,32 @@ function playRound(){
 //Craete a function (game) to call all three functions and  update scores.
 function game(){
     playRound();
+    updateScoreboard();
+    compileScores();
+}
 
-// Compile playerScore and computerScore and Declare a Winner.
+//A function to updateScoreboard
+function updateScoreboard(){
+    userScore_span.innerHTML = userScore;
+    computerScore_span.innerHTML = computerScore;
+    round_span.innerHTML = round;
+    const play = playRound();
+    
+    //Conditions for Scores Update for User and Computer
+    if (play === "Won"){
+        userScore ++;
+        round ++;
+    }else if (play === "Lose"){
+        computerScore ++;
+        round ++;
+    }else {
+        round ++;
+    }
+}
+
+//A function to compile scores
+function compileScores(){
+    // Compile playerScore and computerScore and Declare a Winner.
     if (userScore === 5){
         remark_p.textContent = ("Congratulations, You Won the Game!!!");
         clearBoard();
@@ -115,27 +138,9 @@ function game(){
     }
 }
 
-function updateScoreboard(){
-    userScore_span.innerHTML = userScore;
-    computerScore_span.innerHTML = computerScore;
-    round_span.innerHTML = round;
-    
-    //Conditions for Scores Update for User and Computer
-    if ("Won"){
-        userScore ++;
-        round ++;
-    }else if ("Lose"){
-        computerScore ++;
-        round ++;
-    }else {
-        round ++;
-    }
-}
-
 //A clearBoard function to reset all scores and rounds after any 5 point score
 function clearBoard(){
     userScore = 0;
     computerScore = 0;
     round = 1;
 }
-game();
