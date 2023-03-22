@@ -49,79 +49,33 @@ function getComputerChoice(){
     }
 }
 
-//Create a Function (playRound) to call getPlayerChoice and getComputerChoice to play one round of the game
-function playRound(playerChoice){
-    playerChoice = getPlayerChoice();
-    const computerSelection = getComputerChoice();
-        if (playerChoice === computerSelection){
-            remark_p.textContent = ("Its a Tie, Try Again!!!");
-            return "Tie";
-        }else {
-            if (playerChoice === "Paper"){
-                if (computerSelection === "Rock"){
-                    remark_p.textContent = ("You Won!!! Paper Covers Rock.");
-                    return "Won";
-                }else {
-                    remark_p.textContent = ("You Lose!!! Scissors Cuts Paper.");
-                    return "Lose";
-                }
-            }else if (playerChoice === "Rock"){
-                if (computerSelection === "Scissors"){
-                    remark_p.textContent = ("You Won!!! Rock Smashes Scissors.");
-                    return "Won";
-                }else {
-                    remark_p.textContent = ("You Lose!!! Paper Covers Rock.");
-                    return "Lose";
-                }
-            }else if(playerChoice === "Scissors"){
-                if (computerSelection === "Paper"){
-                    remark_p.textContent = ("You Won!!! Scissors Cuts Paper.");
-                    return "Won";
-                }else {
-                    remark_p.textContent = ("You Lose!!! Rock Smashes Scissors.");
-                    return "Lose"; 
-                }
-            }else {
-                remark_p.textContent = ("Make a Choice to Start!");
-        }
-    }
-}
-
-//Craete a function (game) to call all three functions and  update scores.
-function game(){
-    paperBtn.addEventListener("click", function(){
-        playerChoice = 'Paper';
-        playRound("Paper");
-    });
-    rockBtn.addEventListener("click", function(){
-        playerChoice = 'Rock';
-        playRound("Rock");
-    });
-   scissorsBtn.addEventListener("click", function(){
-        playerChoice = 'Scissors';
-        playRound("Scissors");
-    });
-}
-game();
-
 //A function to updateScoreboard
-function updateScoreboard(){
+function win() {
+    userScore++;
+    round++;
     userScore_span.innerHTML = userScore;
     computerScore_span.innerHTML = computerScore;
     round_span.innerHTML = round;
-
-    //Conditions for Scores Update for User and Computer
-    if ("Won"){
-        userScore ++;
-        round ++;
-    }else if ("Lose"){
-        computerScore ++;
-        round ++;
-    }else {
-        round ++;
-    }
+    compileScores();
 }
 
+function lose() {
+    computerScore++;
+    round++;
+    userScore_span.innerHTML = userScore;
+    computerScore_span.innerHTML = computerScore;
+    round_span.innerHTML = round;
+    compileScores();
+}
+
+
+function tie() {
+    round++;
+    userScore_span.innerHTML = userScore;
+    computerScore_span.innerHTML = computerScore;
+    round_span.innerHTML = round;
+    compileScores();
+}
 //A function to compile scores
 function compileScores(){
     // Compile playerScore and computerScore and Declare a Winner.
@@ -142,3 +96,56 @@ function clearBoard(){
     computerScore = 0;
     round = 1;
 }
+
+//Create a Function (playRound) to call getPlayerChoice and getComputerChoice to play one round of the game
+function playRound(playerChoice){
+    playerChoice = getPlayerChoice();
+    computerSelection = getComputerChoice();
+    if (playerChoice === computerSelection){
+        remark_p.textContent = ("Its a Tie, Try Again!!!");
+        tie(playerChoice);
+    }else {
+        if (playerChoice === "Paper"){
+            if (computerSelection === "Rock"){
+                remark_p.textContent = ("You Won!!! Paper Covers Rock.");
+                win(playerChoice);
+            }else {
+                remark_p.textContent = ("You Lose!!! Scissors Cuts Paper.");
+                lose(playerChoice);
+            }
+        }else if (playerChoice === "Rock"){
+            if (computerSelection === "Scissors"){
+                remark_p.textContent = ("You Won!!! Rock Smashes Scissors.");
+                win(playerChoice);
+            }else {
+                remark_p.textContent = ("You Lose!!! Paper Covers Rock.");
+                lose(playerChoice);
+            }
+        }else if(playerChoice === "Scissors"){
+            if (computerSelection === "Paper"){
+                remark_p.textContent = ("You Won!!! Scissors Cuts Paper.");
+                win(playerChoice);
+            }else {
+                remark_p.textContent = ("You Lose!!! Rock Smashes Scissors.");
+                lose(playerChoice); 
+            }
+        }
+    }
+}
+
+//Craete a function (game) to call all three functions and  update scores.
+function game(){
+    paperBtn.addEventListener("click", function(){
+        playerChoice = 'Paper';
+        playRound("Paper");
+    });
+    rockBtn.addEventListener("click", function(){
+        playerChoice = 'Rock';
+        playRound("Rock");
+    });
+   scissorsBtn.addEventListener("click", function(){
+        playerChoice = 'Scissors';
+        playRound("Scissors");
+    });
+}
+game();
